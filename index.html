@@ -319,6 +319,26 @@
     </div>
   </div>
 
+  <!-- MODAL 4: 경쟁사 고객 불편사항(VOC) 상세 보기 팝업 -->
+  <div class="modal-overlay" id="voc-modal-overlay">
+    <div class="modal-content" style="max-width: 500px;">
+      <button class="modal-close" onclick="closeModal('voc-modal-overlay')">
+        <i data-lucide="x" style="width: 24px; height: 24px;"></i>
+      </button>
+      <div class="modal-header">
+        <span class="advice-badge" style="border-color: var(--rose-gold); color: var(--rose-gold);">
+          <i data-lucide="info" style="width: 12px; height: 12px;"></i>
+          고객 불편사항(VOC) 전체 확인
+        </span>
+        <h2 class="modal-title" id="voc-modal-title" style="color: var(--rose-gold);">광명 아이벡스 불편사항</h2>
+        <p class="modal-subtitle">커뮤니티 및 상담 피드백을 통해 수집된 객관적 고려 요소 리스트입니다.</p>
+      </div>
+      <div class="voc-list-container" id="voc-list-container" style="display: flex; flex-direction: column; gap: 12px; margin-top: 15px; max-height: 400px; overflow-y: auto; padding-right: 5px;">
+        <!-- VOC items will be rendered dynamically here -->
+      </div>
+    </div>
+  </div>
+
   <!-- MOBILE BLOCKER OVERLAY (V5.0 Mobile Blocker Spec) -->
   <div class="mobile-blocker" id="mobile-blocker-overlay">
     <div class="mobile-blocker-content">

@@ -274,7 +274,10 @@ function renderCompetitorCards() {
               <i data-lucide="info" style="width: 14px; height: 14px;"></i>
               ${isWithUs ? '객관적 고려/보완사항' : '수집된 고객 불편사항'}
             </span>
-            <p class="sw-desc">${comp.weaknesses[0]} (외 ${comp.weaknesses.length - 1}건)</p>
+            <p class="sw-desc">
+              ${comp.weaknesses[0]} 
+              <span class="voc-link" onclick="openVocModal('${comp.id}')" style="white-space: nowrap;">(외 ${comp.weaknesses.length - 1}건)</span>
+            </p>
           </div>
         </div>
 
@@ -678,6 +681,39 @@ window.saveCompetitorOverride = () => {
 
   // 모달 닫기
   closeModal('edit-modal-overlay');
+};
+
+// 경쟁사 VOC 상세 모달 열기
+window.openVocModal = (competitorId) => {
+  const competitor = window.CompetitorsData.find(c => c.id === competitorId);
+  if (!competitor) return;
+
+  const modal = document.getElementById('voc-modal-overlay');
+  const title = document.getElementById('voc-modal-title');
+  const listContainer = document.getElementById('voc-list-container');
+
+  title.textContent = `${competitor.name} 불편사항`;
+  listContainer.innerHTML = '';
+
+  competitor.weaknesses.forEach((weak, idx) => {
+    const item = document.createElement('div');
+    item.className = 'voc-item';
+    item.style.padding = '12px';
+    item.style.background = 'var(--inner-bg)';
+    item.style.border = '1px solid var(--inner-border)';
+    item.style.borderRadius = '8px';
+    item.style.fontSize = '0.85rem';
+    item.style.lineHeight = '1.5';
+    item.style.color = 'var(--text-primary)';
+    item.style.textAlign = 'justify';
+    item.style.wordBreak = 'keep-all';
+    
+    item.innerHTML = `<strong style="color: var(--rose-gold); margin-right: 6px;">[사례 ${idx + 1}]</strong> ${weak}`;
+    listContainer.appendChild(item);
+  });
+
+  modal.classList.add('active');
+  lucide.createIcons();
 };
 
 // V5.0: Mobile Blocker Overlay Text Rotation Animation

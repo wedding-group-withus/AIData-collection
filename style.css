@@ -335,6 +335,16 @@ body::after {
   box-shadow: 0 0 10px var(--gold-glow);
 }
 
+.custom-select option {
+  background-color: #121318;
+  color: #E2E4E9;
+}
+
+body.light-theme .custom-select option {
+  background-color: #FFFFFF;
+  color: #2C2B29;
+}
+
 .time-btn-group {
   display: flex;
   background: var(--inner-bg);
@@ -1284,3 +1294,28 @@ body.light-theme .range-warning-banner {
   user-select: none;
   transition: opacity 0.4s ease, filter 0.4s ease;
 }
+
+/* Link for competition VOC Modal Trigger */
+.voc-link {
+  color: var(--rose-gold);
+  text-decoration: underline;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  margin-left: 4px;
+}
+
+.voc-link:hover {
+  color: var(--gold);
+  opacity: 0.85;
+}
+
+/* VOC list modal scrolling layout */
+.voc-list-container::-webkit-scrollbar {
+  width: 4px;
+}
+
+.voc-list-container::-webkit-scrollbar-thumb {
+  background: var(--scroll-thumb);
+  border-radius: 2px;
+}
+
