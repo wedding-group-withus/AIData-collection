@@ -339,6 +339,7 @@ window.getStrategy = (competitorId, month, timeSlot, year = 2026) => {
   let isOverridden = false;
 
   const ceilTo500 = (val) => Math.ceil(val / 500) * 500;
+  const ceilTo500000 = (val) => Math.ceil(val / 500000) * 500000;
 
   if (override) {
     calculatedRental = Number(override.rentalFee);
@@ -352,8 +353,8 @@ window.getStrategy = (competitorId, month, timeSlot, year = 2026) => {
     const avgBaseRental = (competitor.baseRentalFeeRange.min + competitor.baseRentalFeeRange.max) / 2;
     const avgBaseMeal = (competitor.baseMealCostRange.min + competitor.baseMealCostRange.max) / 2;
 
-    // 가중치 적용 최종 견적 및 500원 단위 올림 정렬
-    calculatedRental = ceilTo500(avgBaseRental * sMult.rental * slotConfig.rentalMultiplier);
+    // 가중치 적용 최종 견적 및 50만 원 단위 올림 정렬
+    calculatedRental = ceilTo500000(avgBaseRental * sMult.rental * slotConfig.rentalMultiplier);
     calculatedMeal = ceilTo500(avgBaseMeal * sMult.meal * slotConfig.mealMultiplier);
     calculatedGuarantee = slotConfig.minGuarantee;
   }
@@ -374,7 +375,7 @@ window.getStrategy = (competitorId, month, timeSlot, year = 2026) => {
     withUsMeal = Number(withUsOverride.mealCost);
     withUsGuarantee = Number(withUsOverride.minGuarantee);
   } else {
-    withUsRental = ceilTo500(window.WithUsData.baseRentalFee * withUsSeasonMult * withUsTimeMult);
+    withUsRental = ceilTo500000(window.WithUsData.baseRentalFee * withUsSeasonMult * withUsTimeMult);
     withUsMeal = ceilTo500(window.WithUsData.baseMealCost - (isOffPeak ? 3000 : 0));
     withUsGuarantee = Math.min(200, calculatedGuarantee);
   }
@@ -403,7 +404,7 @@ window.getStrategy = (competitorId, month, timeSlot, year = 2026) => {
       ];
       break;
     case "gwangmyeong_trade":
-      adviseMent = "교통 편의성을 높이 평가하되, 피크타임 단층 로비 동선의 쾌적함과 뷔페 요리 가짓수의 넉넉함을 대비하여 상담을 이끄세요.";
+      adviseMent = "교통 편의성을 높이 평가하되, 피크타임 단층 로비 동선의 쾌적함 and 뷔페 요리 가짓수의 넉넉함을 대비하여 상담을 이끄세요.";
       detailReason = `${competitor.name}은 KTX 역세권이라는 확실한 교통 편의성이 있으나 주말 인근 쇼핑몰 정체로 도로 진입이 다소 혼잡할 수 있고 단층 로비의 하객 집중 시간대 혼잡 우려가 있습니다. 또한 연회 가짓수가 위더스에 비해 콤팩트한 편이므로 위더스의 단독 층별 로비 구성과 140여 가지 고품격 라이브 메뉴 구성을 객관적으로 대조해 주십시오.`;
       counterScript = [
         { role: "신랑신부", text: "광명무역센터는 KTX역 근처라 멀리서 오는 친척들이 오기 편할 것 같아요." },
@@ -446,7 +447,7 @@ window.getStrategy = (competitorId, month, timeSlot, year = 2026) => {
   } else {
     const avgBaseRental = (competitor.baseRentalFeeRange.min + competitor.baseRentalFeeRange.max) / 2;
     const avgBaseMeal = (competitor.baseMealCostRange.min + competitor.baseMealCostRange.max) / 2;
-    rentalFormula = `기본 평균 대관료 (${(avgBaseRental/10000).toFixed(0)}만) x ${seasonLabel} (${sMult.rental.toFixed(2)}) x ${timeSlotLabel} (${slotConfig.rentalMultiplier.toFixed(2)}) = ${(calculatedRental/10000).toFixed(0)}만 원`;
+    rentalFormula = `기본 평균 대관료 (${(avgBaseRental/10000).toFixed(0)}만) x ${seasonLabel} (${sMult.rental.toFixed(2)}) x ${timeSlotLabel} (${slotConfig.rentalMultiplier.toFixed(2)}) [50만 원 단위 올림] = ${(calculatedRental/10000).toFixed(0)}만 원`;
     mealFormula = `기본 평균 식대 (${(avgBaseMeal/1000).toFixed(0)}천) x ${seasonLabel} (${sMult.meal.toFixed(2)}) x ${timeSlotLabel} (${slotConfig.mealMultiplier.toFixed(2)}) = ${(calculatedMeal/1000).toFixed(0)}천 원`;
   }
 
@@ -458,7 +459,7 @@ window.getStrategy = (competitorId, month, timeSlot, year = 2026) => {
     withUsRentalFormula = `[정보 업데이트 반영] 위더스 대관료: ${(withUsRental).toLocaleString()}원 (${withUsOverrideObj.requiredOptions ? withUsOverrideObj.requiredOptions : '기본 조건'})`;
     withUsMealFormula = `[정보 업데이트 반영] 위더스 식대: ${(withUsMeal).toLocaleString()}원 (보증인원 ${withUsGuarantee}명, 특이사항: ${withUsOverrideObj.notes ? withUsOverrideObj.notes : '없음'})`;
   } else {
-    withUsRentalFormula = `위더스 기본 대관료 (${(window.WithUsData.baseRentalFee/10000).toFixed(0)}만) x ${seasonLabel} (${withUsSeasonMult.toFixed(2)}) x ${timeSlotLabel} (${withUsTimeMult.toFixed(2)}) = ${(withUsRental/10000).toFixed(0)}만 원`;
+    withUsRentalFormula = `위더스 기본 대관료 (${(window.WithUsData.baseRentalFee/10000).toFixed(0)}만) x ${seasonLabel} (${withUsSeasonMult.toFixed(2)}) x ${timeSlotLabel} (${withUsTimeMult.toFixed(2)}) [50만 원 단위 올림] = ${(withUsRental/10000).toFixed(0)}만 원`;
     withUsMealFormula = `위더스 기본 식대 (${(window.WithUsData.baseMealCost/1000).toFixed(0)}천) ${isOffPeak ? 'x 비수기 혜택 (-3천)' : 'x 표준가'} = ${(withUsMeal/1000).toFixed(0)}천 원`;
   }
 
