@@ -514,11 +514,11 @@ function startCrawlLogSimulation() {
     addCrawlLog();
   }
 
-  // Set interval to push a new crawl log entry every 8 seconds
+  // Set interval to push a new crawl log entry every 30 seconds
   setInterval(() => {
     addCrawlLog();
     triggerWaveformPulse();
-  }, 8000);
+  }, 30000);
 }
 
 function addCrawlLog() {
@@ -571,7 +571,7 @@ function addCrawlLog() {
 
 // Make AI waveform flash briefly when new data is parsed
 function triggerWaveformPulse() {
-  aiVoiceStatus.textContent = "새로운 커뮤니티 VOC 데이터를 분석하여 실시간 대시보드 및 공략 포인트를 업데이트했습니다.";
+  aiVoiceStatus.textContent = "새로운 커뮤니티 VOC 데이터를 분석하여 대시보드 및 공략 포인트를 업데이트했습니다.";
   aiVoiceStatus.style.color = 'var(--gold)';
   
   // Set status tag pulse speed
