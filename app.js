@@ -6,6 +6,7 @@ let currentYear = 2026;
 let currentMonth = 10;
 let currentTimeSlot = 'golden';
 let activeNextMove = null;
+let crawlIndex = 0;
 
 // DOM Elements
 const yearSelect = document.getElementById('wedding-year-select');
@@ -521,7 +522,12 @@ function startCrawlLogSimulation() {
 }
 
 function addCrawlLog() {
-  const log = window.CrawlLogExamples[Math.floor(Math.random() * window.CrawlLogExamples.length)];
+  if (!window.CrawlLogExamples || window.CrawlLogExamples.length === 0) return;
+  
+  // Use sequential index loop to avoid duplicates
+  const log = window.CrawlLogExamples[crawlIndex];
+  crawlIndex = (crawlIndex + 1) % window.CrawlLogExamples.length;
+  
   const feedContainer = liveStreamFeedContainer;
 
   const item = document.createElement('a');
@@ -530,10 +536,6 @@ function addCrawlLog() {
   item.className = 'feed-item';
   item.style.textDecoration = 'none';
   item.style.display = 'block';
-
-  // Get current timestamp format
-  const now = new Date();
-  const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
 
   // Parse tag brackets like [견적 분석] from log text using regular expression
   let tagHtml = '';
@@ -549,7 +551,7 @@ function addCrawlLog() {
   item.innerHTML = `
     <div class="feed-header">
       <span class="feed-source">${log.source}</span>
-      <span>${timeStr} 수집</span>
+      <span>${log.uploadedAt} 작성</span>
     </div>
     <div class="feed-body-layout" style="display: flex; flex-direction: column; gap: 6px; margin-top: 6px;">
       <div style="display: flex; justify-content: flex-start;">

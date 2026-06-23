@@ -514,61 +514,73 @@ window.CrawlLogExamples = [
   { 
     source: "다이렉트 결혼준비 카페", 
     text: "[견적 분석] 광명 아이벡스컨벤션 투어 및 견적 - 11m 높은 층고랑 8K 미디어월은 최고인데 미디어 연출 비용이랑 식대가 꽤 높게 잡혔네요.",
-    url: "https://cafe.naver.com/directwedding/9008182"
+    url: "https://cafe.naver.com/directwedding/9008182",
+    uploadedAt: "2026-06-20 11:24"
   },
   { 
     source: "네이버 블로그", 
     text: "[계약/견적] 광명무역센터컨벤션 계약 및 견적 - KTX 광명역 바로 코앞이라 대중교통 접근성이 최고고 단독홀 은하수 조명 연출이 너무 예쁩니다.",
-    url: "https://blog.naver.com/ashley700/224308023919"
+    url: "https://blog.naver.com/ashley700/224308023919",
+    uploadedAt: "2026-06-21 15:40"
   },
   { 
     source: "웨딩킹 카페", 
     text: "[교통/주차] 안양 루이비스컨벤션 투어 후기 - 안양역 연결되어 지하철 하객에겐 정말 좋은데 엔터식스 쇼핑몰이랑 주차를 같이 써서 주말에 좀 복잡해요.",
-    url: "https://cafe.naver.com/llchyll/2491887"
+    url: "https://cafe.naver.com/llchyll/2491887",
+    uploadedAt: "2026-06-22 09:12"
   },
   { 
     source: "메이크마이웨딩 카페", 
     text: "[식사/주차] 더파티움 안양 브리에홀 계약 - 홀 인테리어도 세련되고 연회장 뷔페 음식도 다 맛있다는 평인데 주차가 외부 4곳으로 분산된 점은 하객 안내가 필요하겠어요.",
-    url: "https://cafe.naver.com/makemywedding/566960"
+    url: "https://cafe.naver.com/makemywedding/566960",
+    uploadedAt: "2026-06-22 17:05"
   },
   { 
     source: "네이버 블로그", 
     text: "[날씨/조도] 빌라드지디 안양 3층 크리스탈캐슬 하우스웨딩 - 천창 유리로 쏟아지는 햇살이 정말 예쁜데 날씨 흐리거나 눈오면 홀 내부 조도가 약간 복불복일 것 같아 걱정이에요.",
-    url: "https://search.naver.com/search.naver?where=blog&query=%E1%84%87%E1%85%B5%E1%86%AF%E1%84%85%E1%85%A1%E1%84%83%E1%85%B3%E1%84%8C%E1%85%B5%E1%84%83%E1%85%B5+%E1%84%8B%E1%85%A1%E1%84%82%E1%85%A3%E1%86%BC+%E1%84%90%E1%85%AE%E1%84%8B%E1%85%A5"
+    url: "https://blog.naver.com/llyram/223789025112",
+    uploadedAt: "2026-06-23 08:30"
   },
   { 
     source: "다이렉트 결혼준비 카페", 
     text: "[공간/주차] 안양 위더스 단독 건물 투어 - 안양에서 유일한 단독 전용 웨딩빌딩이라 동선이 엄청 편하고 단독 주차빌딩 1000대 수용이라 주차 스트레스 전혀 없었어요.",
-    url: "https://cafe.naver.com/directwedding/8886485"
+    url: "https://cafe.naver.com/directwedding/8886485",
+    uploadedAt: "2026-06-21 14:15"
   },
   { 
     source: "다이렉트 웨딩카페", 
     text: "[날씨/셔틀] 빌라드지디 안양 흐린 날 조도 후기 - 비 오는 주말에 하객으로 다녀왔는데 날씨 탓인지 홀이 생각보다 좀 어둡고 역에서 셔틀 타는 게 비 와서 좀 번거로웠네요.",
-    url: "https://cafe.naver.com/directwedding/8306802"
+    url: "https://cafe.naver.com/directwedding/8306802",
+    uploadedAt: "2026-06-20 18:22"
   },
   { 
     source: "네이버 블로그", 
     text: "[식사/연회] 웨딩그룹 위더스 안양 연회장 시식 - 가짓수가 140가지나 되고 라이브 키친 스테이크랑 즉석 요리들이 바로 구워져서 나와 퀄리티가 상당히 만족스럽습니다.",
-    url: "https://blog.naver.com/djekek9494/224228956844"
+    url: "https://blog.naver.com/djekek9494/224228956844",
+    uploadedAt: "2026-06-22 13:45"
   },
   { 
     source: "다이렉트 결혼준비 카페", 
     text: "[동선/본식] 평촌 더파티움 안양 본식 스냅 - 독특한 S자형 곡선 버진로드가 스냅 사진에는 엄청 입체적으로 잘 나오는데 신부가 걸을 땐 드레스 밟히지 않게 조심조심 걸었대요.",
-    url: "https://blog.naver.com/hjkl211/223757051723"
+    url: "https://blog.naver.com/hjkl211/223757051723",
+    uploadedAt: "2026-06-19 20:10"
   },
   { 
     source: "아이웨딩", 
     text: "[견적 분석] 루이비스컨벤션 안양점 공식 단가 정보 - 안양역 복합몰 내 접근성이 장점이나 토요일 골든타임 보증인원 기준 및 연출 옵션 요건 실시간 분석 제공.",
-    url: "https://www.iwedding.co.kr/brand/hall/list"
+    url: "https://www.iwedding.co.kr/brand/hall/index/1569",
+    uploadedAt: "2026-06-18 10:00"
   },
   { 
     source: "다이렉트 결혼준비 카페", 
     text: "[교통/주차] 광명무역센터컨벤션 주말 주차 후기 - KTX역 인근으로 하객 이동은 무난하나 주말 오피스 차량 진입 동선이 병합되어 주차 대기시간 지연 발생.",
-    url: "https://cafe.naver.com/directwedding/9008182"
+    url: "https://cafe.naver.com/directwedding/9008182",
+    uploadedAt: "2026-06-20 16:30"
   },
   { 
     source: "웨딩킹 카페", 
     text: "[식사/주차] 평촌 더파티움 안양 하객 주차 분산 - 내부 주차장 만차 시 이마트나 주변 4곳의 분산 주차장에 차를 대야 해서 연로하신 하객 이동 시 안내 수반됨.",
-    url: "https://cafe.naver.com/llchyll/2491887"
+    url: "https://cafe.naver.com/llchyll/2491887",
+    uploadedAt: "2026-06-21 11:10"
   }
 ];
