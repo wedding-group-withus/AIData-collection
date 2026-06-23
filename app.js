@@ -247,7 +247,7 @@ function renderCompetitorCards() {
           ${badgeHtml}
         </div>
 
-        <div class="pricing-box">
+        <div class="pricing-box" style="margin-bottom: 8px;">
           <div class="price-item">
             <span class="price-lbl">${isWithUs ? '위더스 대관료' : '추정 대관료'}</span>
             <span class="price-val">${(strat.rentalFee).toLocaleString()}원</span>
@@ -261,6 +261,11 @@ function renderCompetitorCards() {
             <span class="price-val highlight">${strat.minGuarantee}명</span>
           </div>
         </div>
+
+        <p class="pricing-disclaimer" style="font-size: 0.68rem; font-weight: 500; color: var(--gold); line-height: 1.4; margin-top: 0; margin-bottom: 15px; text-align: justify; word-break: keep-all; letter-spacing: -0.01em; display: flex; align-items: flex-start; gap: 4px;">
+          <span style="flex-shrink: 0; margin-top: 1px;">*</span>
+          <span>현장 상황에 따라 1~2천 원 정도의 식대 편차 또는 프로모션에 따른 대관료 할인이 있을 수 있습니다.</span>
+        </p>
 
         <div class="strength-weakness-box">
           <div class="sw-item">

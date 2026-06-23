@@ -338,6 +338,8 @@ window.getStrategy = (competitorId, month, timeSlot) => {
   let notes = "";
   let isOverridden = false;
 
+  const ceilTo500 = (val) => Math.ceil(val / 500) * 500;
+
   if (override) {
     calculatedRental = Number(override.rentalFee);
     calculatedMeal = Number(override.mealCost);
@@ -350,9 +352,9 @@ window.getStrategy = (competitorId, month, timeSlot) => {
     const avgBaseRental = (competitor.baseRentalFeeRange.min + competitor.baseRentalFeeRange.max) / 2;
     const avgBaseMeal = (competitor.baseMealCostRange.min + competitor.baseMealCostRange.max) / 2;
 
-    // 가중치 적용 최종 견적
-    calculatedRental = Math.round(avgBaseRental * sMult.rental * slotConfig.rentalMultiplier);
-    calculatedMeal = Math.round(avgBaseMeal * sMult.meal * slotConfig.mealMultiplier);
+    // 가중치 적용 최종 견적 및 500원 단위 올림 정렬
+    calculatedRental = ceilTo500(avgBaseRental * sMult.rental * slotConfig.rentalMultiplier);
+    calculatedMeal = ceilTo500(avgBaseMeal * sMult.meal * slotConfig.mealMultiplier);
     calculatedGuarantee = slotConfig.minGuarantee;
   }
 
@@ -372,8 +374,8 @@ window.getStrategy = (competitorId, month, timeSlot) => {
     withUsMeal = Number(withUsOverride.mealCost);
     withUsGuarantee = Number(withUsOverride.minGuarantee);
   } else {
-    withUsRental = Math.round(window.WithUsData.baseRentalFee * withUsSeasonMult * withUsTimeMult);
-    withUsMeal = window.WithUsData.baseMealCost - (isOffPeak ? 3000 : 0);
+    withUsRental = ceilTo500(window.WithUsData.baseRentalFee * withUsSeasonMult * withUsTimeMult);
+    withUsMeal = ceilTo500(window.WithUsData.baseMealCost - (isOffPeak ? 3000 : 0));
     withUsGuarantee = Math.min(200, calculatedGuarantee);
   }
 
