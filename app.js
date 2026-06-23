@@ -196,7 +196,7 @@ function renderCompetitorCards() {
   competitorsGridContainer.innerHTML = '';
 
   window.CompetitorsData.forEach(comp => {
-    const strat = window.getStrategy(comp.id, currentMonth, currentTimeSlot);
+    const strat = window.getStrategy(comp.id, currentMonth, currentTimeSlot, currentYear);
     if (!strat) return;
 
     const isWithUs = comp.id === 'withus';
@@ -387,7 +387,7 @@ window.toggleFormula = (btn) => {
 
 // Modal open helper: 약점 카운터 상담 스크립트 모달
 window.openScriptModal = (competitorId) => {
-  const strat = window.getStrategy(competitorId, currentMonth, currentTimeSlot);
+  const strat = window.getStrategy(competitorId, currentMonth, currentTimeSlot, currentYear);
   if (!strat) return;
 
   const modal = document.getElementById('script-modal-overlay');
@@ -431,7 +431,7 @@ window.openScriptModal = (competitorId) => {
 
 // Modal open helper: 견적 비교 시뮬레이터 모달
 window.openSimulatorModal = (competitorId) => {
-  const strat = window.getStrategy(competitorId, currentMonth, currentTimeSlot);
+  const strat = window.getStrategy(competitorId, currentMonth, currentTimeSlot, currentYear);
   if (!strat) return;
 
   const modal = document.getElementById('simulator-modal-overlay');
@@ -468,7 +468,7 @@ window.openSimulatorModal = (competitorId) => {
 
 // Calculate and render visual bar graphs in simulator
 function updateSimulation(competitorId) {
-  const strat = window.getStrategy(competitorId, currentMonth, currentTimeSlot);
+  const strat = window.getStrategy(competitorId, currentMonth, currentTimeSlot, currentYear);
   if (!strat) return;
 
   const compRental = Number(document.getElementById('sim-comp-rental').value) || 0;
@@ -603,33 +603,36 @@ window.openEditModal = (competitorId) => {
   const title = document.getElementById('edit-modal-title');
   const compIdInput = document.getElementById('edit-comp-id');
   
+  const yearInput = document.getElementById('edit-comp-year');
   const monthInput = document.getElementById('edit-comp-month');
   const timeInput = document.getElementById('edit-comp-time');
 
   title.textContent = `${competitor.name} 정보 수정`;
   compIdInput.value = competitorId;
 
-  // 기본적으로 현재 대시보드의 필터 월 및 시간대를 기본값으로 세팅
+  // 기본적으로 현재 대시보드의 필터 년도, 월 및 시간대를 기본값으로 세팅
+  yearInput.value = currentYear;
   monthInput.value = currentMonth;
   timeInput.value = currentTimeSlot;
 
-  // 해당 월/시간대의 기존 데이터 로드
+  // 해당 년도/월/시간대의 기존 데이터 로드
   loadCurrentOverrideData();
 
   modal.classList.add('active');
 };
 
-// 현재 모달에 선택된 월/시간대에 맞춰 인풋 필드 채우기
+// 현재 모달에 선택된 년도/월/시간대에 맞춰 인풋 필드 채우기
 window.loadCurrentOverrideData = () => {
   const competitorId = document.getElementById('edit-comp-id').value;
   const competitor = window.CompetitorsData.find(c => c.id === competitorId);
   if (!competitor) return;
 
+  const targetYear = document.getElementById('edit-comp-year').value;
   const targetMonth = document.getElementById('edit-comp-month').value;
   const targetTime = document.getElementById('edit-comp-time').value;
 
   // getStrategy를 활용해 현재 시점의 최종 가격(오버라이드 적용 또는 기본 계산 가격)을 조회
-  const currentStrat = window.getStrategy(competitorId, targetMonth, targetTime);
+  const currentStrat = window.getStrategy(competitorId, targetMonth, targetTime, targetYear);
   
   const rentalInput = document.getElementById('edit-comp-rental');
   const mealInput = document.getElementById('edit-comp-meal');
@@ -652,6 +655,7 @@ window.saveCompetitorOverride = () => {
   const competitor = window.CompetitorsData.find(c => c.id === competitorId);
   if (!competitor) return;
 
+  const targetYear = document.getElementById('edit-comp-year').value;
   const targetMonth = document.getElementById('edit-comp-month').value;
   const targetTime = document.getElementById('edit-comp-time').value;
 
@@ -665,7 +669,7 @@ window.saveCompetitorOverride = () => {
     competitor.overrides = {};
   }
 
-  const overrideKey = `${targetMonth}-${targetTime}`;
+  const overrideKey = `${targetYear}-${targetMonth}-${targetTime}`;
   competitor.overrides[overrideKey] = {
     rentalFee,
     mealCost,

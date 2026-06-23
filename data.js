@@ -303,7 +303,7 @@ window.CompetitorsData = [
 ];
 
 // 월별/시간대별 실시간 전략 매핑
-window.getStrategy = (competitorId, month, timeSlot) => {
+window.getStrategy = (competitorId, month, timeSlot, year = 2026) => {
   const competitor = window.CompetitorsData.find(c => c.id === competitorId);
   if (!competitor) return null;
 
@@ -329,8 +329,8 @@ window.getStrategy = (competitorId, month, timeSlot) => {
   const sMult = competitor.pricingModel.multipliers[seasonType];
   const slotConfig = competitor.pricingModel.timeSlots[timeSlot] || competitor.pricingModel.timeSlots.regular;
 
-  // Check for manual overrides for current month and time slot
-  const overrideKey = `${month}-${timeSlot}`;
+  // Check for manual overrides for current month, time slot, and year
+  const overrideKey = `${year}-${month}-${timeSlot}`;
   const override = competitor.overrides[overrideKey];
 
   let calculatedRental, calculatedMeal, calculatedGuarantee;
