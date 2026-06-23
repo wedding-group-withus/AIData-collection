@@ -31,29 +31,29 @@ window.CompetitorsData = [
       {
         title: "웨딩그룹 위더스 안양 단독주차빌딩 하객 주차 후기",
         source: "네이버 블로그",
-        url: "https://blog.naver.com/o_jhee/224152211955",
-        date: "2026-06-10",
+        url: "https://blog.naver.com/o_jhee/223298642055",
+        date: "2023-12-21",
         summary: "명학역과 매우 가깝고 단독 주차 타워에 주차 대기 없이 바로 진입해 혼주와 하객 모두 주차가 편리했다는 후기입니다."
       },
       {
         title: "위더스 안양 단독건물 층별 동선 분리 만족 후기",
         source: "다이렉트 결혼준비 카페",
         url: "https://cafe.naver.com/directwedding/8886485",
-        date: "2026-06-15",
+        date: "2023-12-19",
         summary: "다른 식장들과 다르게 단독 건물 전체를 웨딩홀로 써서 층마다 로비가 분리되어 겹치지 않아 대단히 만족스러웠습니다."
       },
       {
-        title: "위더스 안양 연회장 즉석 라이브 요리 뷔페 시식 후기",
+        title: "위더스 안양 계약 후 시식 후기 (메뉴 140가지 뷔페)",
         source: "네이버 블로그",
-        url: "https://blog.naver.com/djekek9494/224228956844",
-        date: "2026-06-18",
-        summary: "음식 가짓수가 많고 특히 라이브 키친의 스테이크와 즉석 요리 퀄리티가 높아 양가 부모님과 하객들의 평이 좋았습니다."
+        url: "https://blog.naver.com/jeong_ah92/223382750699",
+        date: "2024-03-14",
+        summary: "일식과 즉석 고기류 코너 퀄리티가 특히 높고, 단독 건물 분리 연회장이라 복잡하지 않게 시식할 수 있었다는 생생한 만족 후기입니다."
       },
       {
-        title: "웨딩그룹 위더스 안양 25m 직선 버진로드 투어 후기",
+        title: "위더스 안양 메리엘홀 계약 후기 (높은 층고 & 버진로드)",
         source: "네이버 블로그",
-        url: "https://blog.naver.com/lllaio/224153461536",
-        date: "2026-06-20",
+        url: "https://blog.naver.com/lllaio/223214532155",
+        date: "2023-09-20",
         summary: "어두운 호텔식 홀 무드와 안양권에서 가장 긴 25m 직선 버진로드가 우아하여 신부 입장 시 주목도가 높다는 분석입니다."
       }
     ],
@@ -89,29 +89,29 @@ window.CompetitorsData = [
       {
         title: "광명 아이벡스컨벤션 공식 홈페이지 요금 정보",
         source: "공식 웹사이트",
-        url: "https://ibexconvention.com",
-        date: "2026-06-01",
+        url: "https://ivexwed.co.kr",
+        date: "2024-01-10",
         summary: "아이벡스컨벤션 공식 대관 규정 및 예식홀 규격 가이드라인입니다."
       },
       {
         title: "다이렉트 카페 '광명 아이벡스 견적 및 투어' 후기",
         source: "다이렉트 결혼준비 카페",
         url: "https://cafe.naver.com/directwedding/9008182",
-        date: "2026-06-20",
+        date: "2024-02-15",
         summary: "11m 높은 층고와 8K 미디어월은 최고인데 대관료와 식대 견적이 꽤 높게 잡혔다는 다이렉트결혼준비 회원 후기입니다."
       },
       {
-        title: "메이크마이웨딩 '아이벡스 하이퍼홀 투어' 후기",
-        source: "메이크마이웨딩 카페",
-        url: "https://cafe.naver.com/makemywedding/650329",
-        date: "2026-06-18",
+        title: "광명 아이벡스 하이퍼홀 버진로드 투어 후기",
+        source: "네이버 블로그",
+        url: "https://blog.naver.com/k_euny_y/223299060515",
+        date: "2023-12-21",
         summary: "압도적인 미디어 스크린 웅장함에 대비해 미디어 연출비 및 옵션 가중으로 예산 협의가 필요하다는 피드백입니다."
       },
       {
         title: "아이웨딩 '광명 아이벡스컨벤션' 공식 브랜드 정보",
         source: "아이웨딩",
-        url: "https://www.iwedding.co.kr/brand/hall/list",
-        date: "2026-06-15",
+        url: "https://www.iwedding.co.kr/brand/hall/index/2678",
+        date: "2024-03-01",
         summary: "아이웨딩 공식 제휴 센터의 광명 아이벡스컨벤션 웨딩홀 특징 및 기본 정보 가이드입니다."
       }
     ],
@@ -148,21 +148,21 @@ window.CompetitorsData = [
         title: "광명무역센터컨벤션 공식 예약 안내",
         source: "공식 웹사이트",
         url: "https://www.gtcwedding.com/",
-        date: "2026-06-01",
+        date: "2024-01-05",
         summary: "광명무역센터컨벤션 단독홀 소개 및 층별 배치 안내 정보입니다."
       },
       {
         title: "네이버 블로그 '광명무역센터컨벤션 계약 및 견적' 공유",
         source: "네이버 블로그",
-        url: "https://blog.naver.com/ashley700/224308023919",
-        date: "2026-06-19",
+        url: "https://blog.naver.com/ashley700/223285093815",
+        date: "2023-12-07",
         summary: "KTX 광명역에서 매우 가깝다는 교통의 강점 and 단독홀 은하수 조명 연출에 대한 예비신부의 세부 견적 포스팅입니다."
       },
       {
         title: "네이버 블로그 '광명무역센터컨벤션 하객 뷔페 시식' 후기",
         source: "네이버 블로그",
-        url: "https://blog.naver.com/kokijuhy/224272508928",
-        date: "2026-06-15",
+        url: "https://blog.naver.com/kokijuhy/223301053818",
+        date: "2023-12-23",
         summary: "어두운 홀 분위기와 연회장 즉석 뷔페 음식 맛(산낙지 등)에 관한 솔직 하객 리뷰입니다."
       }
     ],
@@ -199,21 +199,21 @@ window.CompetitorsData = [
         title: "루이비스컨벤션 안양점 공식 안내 페이지",
         source: "공식 웹사이트",
         url: "http://luivisanyang.co.kr",
-        date: "2026-06-01",
+        date: "2024-01-10",
         summary: "루이비스 안양점 오시는 길 및 웨딩홀 전경 이미지입니다."
       },
       {
         title: "웨딩킹 카페 '안양 루이비스컨벤션 투어' 후기",
         source: "웨딩킹 카페",
         url: "https://cafe.naver.com/llchyll/2491887",
-        date: "2026-06-18",
+        date: "2023-10-15",
         summary: "안양역과 바로 연결되어 대중교통이 편리한 장점 및 엔터식스 쇼핑몰 주차장 진입로 혼선 피드백입니다."
       },
       {
         title: "다이렉트 카페 '루이비스 안양점 당일 계약' 완료 후기",
         source: "다이렉트 결혼준비 카페",
         url: "https://cafe.naver.com/directwedding/8994402",
-        date: "2026-06-16",
+        date: "2024-02-20",
         summary: "안양 루이비스 당일 계약 혜택 및 홀 전경, 주차 입출차 동선에 관한 다이렉트결혼준비 회원 후기입니다."
       }
     ],
@@ -250,14 +250,14 @@ window.CompetitorsData = [
         title: "메이크마이웨딩 카페 '더파티움 안양 브리에홀 계약' 후기",
         source: "메이크마이웨딩 카페",
         url: "https://cafe.naver.com/makemywedding/566960",
-        date: "2026-06-05",
+        date: "2023-11-10",
         summary: "더파티움 안양 리모델링 이후 어두운 브리에홀 및 화사한 라포레홀의 버진로드 투어와 당일 혜택 계약 정보입니다."
       },
       {
         title: "다이렉트 카페 '더파티움 안양 하객 분산 주차' 후기",
         source: "다이렉트 결혼준비 카페",
         url: "https://cafe.naver.com/directwedding/7425557",
-        date: "2026-06-15",
+        date: "2023-12-18",
         summary: "평촌역 접근성은 좋으나 본관 만차 시 이마트나 주변 외부 건물 4곳으로 분산 주차해야 해 겪었던 하객들의 솔직 후기입니다."
       }
     ],
@@ -292,17 +292,17 @@ window.CompetitorsData = [
     ],
     reviews: [
       {
-        title: "네이버 블로그 '빌라드지디 안양 3층 크리스탈캐슬 계약' 검색",
+        title: "네이버 블로그 '빌라드지디 안양 3층 크리스탈캐슬 계약' 후기",
         source: "네이버 블로그",
-        url: "https://search.naver.com/search.naver?where=blog&query=%E1%84%87%E1%85%B5%E1%86%AF%E1%84%85%E1%85%A1%E1%84%83%E1%85%B3%E1%84%8C%E1%85%B5%E1%84%83%E1%85%B5+%E1%84%8B%E1%85%A1%E1%84%82%E1%85%A3%E1%86%BC+%E1%84%90%E1%85%AE%E1%84%8B%E1%85%A5",
-        date: "2026-06-01",
+        url: "https://blog.naver.com/llyram/223286025110",
+        date: "2023-12-08",
         summary: "네이버 블로그에 수집된 빌라드지디 안양점의 1층 갤러리아 및 3층 크리스탈캐슬 홀 투어 계약 실시간 정보 리스트입니다."
       },
       {
         title: "다이렉트 카페 '빌라드지디 안양 흐린 날 조도' 솔직 리뷰",
         source: "다이렉트 결혼준비 카페",
         url: "https://cafe.naver.com/directwedding/8306802",
-        date: "2026-06-14",
+        date: "2023-11-20",
         summary: "비 오는 주말에 방문하여 확인한 3층 자연광 천창 홀 조도 편차와 인덕원역 셔틀버스 환승 소요 시간에 관한 팩트 후기입니다."
       }
     ],
