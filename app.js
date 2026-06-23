@@ -7,6 +7,8 @@ let currentMonth = 10;
 let currentTimeSlot = 'golden';
 let activeNextMove = null;
 let crawlIndex = 0;
+let adviceRotationInterval = null;
+let currentAdviceIndex = 0;
 
 // DOM Elements
 const yearSelect = document.getElementById('wedding-year-select');
@@ -153,41 +155,175 @@ function checkDateRangeLimit() {
 }
 
 // Render AI main recommendation banner and configure "Next Move" proposal
+// AI Advice Data for Rotation by Season & Time Slot
+const AIAdviceData = {
+  peak: {
+    golden: [
+      {
+        targetId: 'ibex',
+        advice: `"현재 성수기 골든타임 상담입니다. 광명 아이벡스는 높은 보증인원(250~300명)과 특수 미디어 연출 옵션 가산비로 예산 부담이 큽니다. 위더스 안양점의 단독 건물 메리트와 함께 보증인원 200명 선에서의 합리적 견적 조율을 제안하여 가격 우위를 선점하십시오."`,
+        nextMoveText: "광명 아이벡스의 예산 상승 부담을 조율하고 위더스의 메리트를 소개하는 '타사 견적 대응 시뮬레이터'를 사용하시겠습니까?",
+        nextMoveAction: () => openSimulatorModal('ibex')
+      },
+      {
+        targetId: 'gwangmyeong_trade',
+        advice: `"광명무역센터컨벤션은 KTX 역세권이 장점이나, 단층 로비의 하객 집중 시간대 혼잡 우려가 큽니다. 위더스의 단독 층별 분리 로비 및 연회 동선의 쾌적함과 140여 가지 풍성한 즉석 요리 비중을 대조하여 설득하십시오."`,
+        nextMoveText: "광명무역센터의 단층 로비 혼잡 제약과 뷔페 요리를 대조하는 '상담 대본'을 사용하시겠습니까?",
+        nextMoveAction: () => openScriptModal('gwangmyeong_trade')
+      },
+      {
+        targetId: 'partyum',
+        advice: `"더파티움 안양은 평촌역 초역세권이나 주차가 4곳으로 분산되어 하객 혼선이 큽니다. 곡선 버진로드의 보폭 제약 대비 위더스의 단독 건물 자체 주차타워 1,000대 수용 편의와 25m 직선 버진로드의 우아함을 대조하십시오."`,
+        nextMoveText: "더파티움 안양의 주말 주차 분산 제약을 대조 설명하기 위한 '상담 대본'을 사용하시겠습니까?",
+        nextMoveAction: () => openScriptModal('partyum')
+      }
+    ],
+    regular: [
+      {
+        targetId: 'villadegd',
+        advice: `"성수기 일반타임 상담입니다. 빌라드지디 안양점의 3층 자연 채광 천창은 날씨에 따른 실내 조도 편차가 크고 지하철역 비도보권으로 셔틀 필수 탑승 제약이 있습니다. 위더스의 날씨 제약 없는 세련된 극장식 단독 홀 구조를 부각시키십시오."`,
+        nextMoveText: "빌라드지디 안양점의 날씨 의존 조도 편차 및 셔틀 환승 고려사항을 비교 설명하기 위한 '상담 대본'을 사용하시겠습니까?",
+        nextMoveAction: () => openScriptModal('villadegd')
+      },
+      {
+        targetId: 'partyum',
+        advice: `"평촌 더파티움은 어두운 브리에홀 및 화사한 라포레홀의 매력이 있으나, 지하 주차장이 협소해 이마트 및 외부 주차장에 분산하는 애로사항이 있습니다. 하객분들의 진입부터 연회 퇴장까지 겹침 없는 단독빌딩의 안정성을 강조하세요."`,
+        nextMoveText: "더파티움 안양의 분산 주차 안내 및 VOC 상담 대본을 사용하시겠습니까?",
+        nextMoveAction: () => openScriptModal('partyum')
+      },
+      {
+        targetId: 'ibex',
+        advice: `"일반타임 예식에서도 광명 아이벡스의 미디어 연출비 가산은 예산의 큰 장벽입니다. 위더스의 웅장하고 높은 극장식 층고 무드를 선사하며 실질 견적 절감 효과를 수치로 시각화해 제안하십시오."`,
+        nextMoveText: "광명 아이벡스의 견적 대비 위더스 계약 시의 실질 예산 절감률을 비교해주는 '견적 비교 계산기'를 사용하시겠습니까?",
+        nextMoveAction: () => openSimulatorModal('ibex')
+      }
+    ],
+    late: [
+      {
+        targetId: 'villadegd',
+        advice: `"나이트타임 예식의 경우 빌라드지디 안양은 200명 이상의 하객 유입 시 로비와 연회장 동선이 협소해지는 공간적 한계가 존재합니다. 위더스의 넉넉한 공간 설계와 쾌적한 피로연 환경을 제시해 보완 가치를 어필하십시오."`,
+        nextMoveText: "빌라드지디 안양점의 공간 협소 VOC를 보완 설명하기 위한 '상담 대본'을 사용하시겠습니까?",
+        nextMoveAction: () => openScriptModal('villadegd')
+      },
+      {
+        targetId: 'gwangmyeong_trade',
+        advice: `"광명무역센터컨벤션은 오피스 빌딩 주차 공유로 주말 입출차 정체 및 주차 등록 지연 발생 우려가 있습니다. 위더스 안양점의 1,000대 수용 자체 주차타워와 고품격 즉석 연회 뷔페 퀄리티의 우위를 부각해 제안하세요."`,
+        nextMoveText: "광명무역센터의 오피스 차량 주차 정체와 연회 가짓수를 대조하는 '상담 대본'을 사용하시겠습니까?",
+        nextMoveAction: () => openScriptModal('gwangmyeong_trade')
+      }
+    ]
+  },
+  offPeak: {
+    golden: [
+      {
+        targetId: 'ibex',
+        advice: `"비수기 골든타임 상담입니다. 광명 아이벡스는 비수기 시즌에도 미디어 필수 가산 옵션 요건으로 인해 대관료 조정 폭이 제한적입니다. 위더스 안양점만의 시즌 잔여타임 스페셜 혜택 조율을 통해 총 견적 예산을 획기적으로 낮출 수 있음을 안내하십시오."`,
+        nextMoveText: "광명 아이벡스 비수기 단가 대비 위더스 특별 조율가를 시뮬레이션하는 '견적 비교 계산기'를 사용하시겠습니까?",
+        nextMoveAction: () => openSimulatorModal('ibex')
+      },
+      {
+        targetId: 'gwangmyeong_trade',
+        advice: `"비수기 KTX 광명역 역세권 광명무역센터의 단층 로비 동선 겹침을 안내하십시오. 위더스는 비수기 혜택에 식대 3,000원 기본 할인 및 보증인원 매칭 혜택까지 더해져 최고의 실리적 품격을 선사합니다."`,
+        nextMoveText: "광명무역센터 비수기 단가 대비 위더스 스페셜 견적 시뮬레이터를 사용하시겠습니까?",
+        nextMoveAction: () => openSimulatorModal('gwangmyeong_trade')
+      }
+    ],
+    regular: [
+      {
+        targetId: 'partyum',
+        advice: `"비수기 일반타임 예식입니다. 평촌 더파티움은 본관 만차 시 하객들이 칼라힐 주차빌딩이나 이마트 등 4곳으로 분산 주차해야 하는 영구적 주차 불편함이 있습니다. 위더스만의 단독 건물 주차타워 1,000대 즉시 주차 메리트를 적극 소개하십시오."`,
+        nextMoveText: "더파티움 안양의 주말 하객 분산 주차 고려사항을 대조 설명하는 '상담 대본'을 사용하시겠습니까?",
+        nextMoveAction: () => openScriptModal('partyum')
+      },
+      {
+        targetId: 'villadegd',
+        advice: `"비수기 일반타임 빌라드지디 안양은 셔틀버스 필수 환승 소요 시간으로 인해 하객 대중교통 만족도가 낮아집니다. 명학역 도보 2분 초역세권에 단독 웨딩 전용 건물을 갖춘 위더스의 기동성과 접근 편의를 비교 제안하십시오."`,
+        nextMoveText: "빌라드지디 안양의 인덕원역 셔틀 환승 불편 VOC를 설명하는 '상담 대본'을 사용하시겠습니까?",
+        nextMoveAction: () => openScriptModal('villadegd')
+      }
+    ],
+    late: [
+      {
+        targetId: 'gwangmyeong_trade',
+        advice: `"비수기 나이트타임 상담입니다. 광명무역센터는 주말 인근 쇼핑몰 유입과 오피스 차량 진입 동선이 병합되어 주말 출차 지연 우려가 큽니다. 또한 연회장 메뉴가 콤팩트하여 하객 접대 기호 편차가 존재하므로 위더스의 다양한 즉석 요리 비중을 소개하십시오."`,
+        nextMoveText: "광명무역센터의 오피스 차량 입출차 혼잡과 연회 가짓수를 대조하는 '상담 대본'을 사용하시겠습니까?",
+        nextMoveAction: () => openScriptModal('gwangmyeong_trade')
+      }
+    ]
+  }
+};
+
+// Render AI main recommendation banner and configure "Next Move" proposal with 20s rotation loop
 function renderAIAdvice() {
   const isPeak = [4, 5, 9, 10, 11].includes(currentMonth);
-  let mainAdvice = "";
-  
-  if (isPeak) {
-    if (currentTimeSlot === 'golden') {
-      mainAdvice = `"현재 ${currentMonth}월 성수기 골든타임(11:00~14:50) 상담입니다. 주변 경쟁사들은 높은 보증인원(250~300명)과 연출비 추가 옵션을 가산하는 추세입니다. 위더스는 단독 전용 빌딩의 쾌적한 동선과 보증인원 200명 선에서 유연하게 조율을 제안하여, 실속 있고 품격 높은 예식을 지향하는 상담이 유효합니다."`;
-      activeNextMove = {
-        text: "광명 아이벡스의 예산 상승 부담을 조율하고 위더스의 메리트를 소개하는 '타사 견적 대응 시뮬레이터'를 사용하시겠습니까?",
-        action: () => openSimulatorModal('ibex')
-      };
-    } else {
-      mainAdvice = `"성수기 일반/나이트 타임 상담입니다. 빌라드지디 안양점의 3층 자연 채광 조도 편차 및 셔틀 환승 동선 제약을 대조하여, 위더스 안양점의 날씨 제약 없는 기품 있는 조명 연출과 도보 접근성을 정중히 부각시키십시오."`;
-      activeNextMove = {
-        text: "빌라드지디 안양점의 날씨 의존 조도 편차 및 셔틀 환승 고려사항을 비교 설명하기 위한 '상담 대본'을 사용하시겠습니까?",
-        action: () => openScriptModal('villadegd')
-      };
-    }
-  } else {
-    // Off-peak
-    mainAdvice = `"${currentMonth}월 비수기 상담입니다. 타사에서 비수기 대관 할인 혜택을 집중 제안할 시기이므로 단순 단가 비교보다는, 안양역사 쇼핑몰 내 일반 유입 고객과의 주차/엘리베이터 동선 혼용 우려 등 하객 편의성 요소를 짚어드리며 '위더스 단독 웨딩빌딩의 쾌적함과 격조'를 차분히 대조하는 것이 좋습니다."`;
-    activeNextMove = {
-      text: "루이비스 안양점의 안양역 쇼핑몰 인파 교차 혼잡사항을 대조하는 '상담 대본'을 사용하시겠습니까?",
-      action: () => openScriptModal('luivis')
-    };
+  const seasonKey = isPeak ? 'peak' : 'offPeak';
+  const timeKey = currentTimeSlot;
+
+  // Get matching advice list (fallback to golden if regular/late is missing)
+  const advices = (AIAdviceData[seasonKey] && AIAdviceData[seasonKey][timeKey]) 
+    ? AIAdviceData[seasonKey][timeKey] 
+    : (AIAdviceData[seasonKey] ? AIAdviceData[seasonKey].golden : []);
+
+  // Clear existing rotation timer
+  if (adviceRotationInterval) {
+    clearInterval(adviceRotationInterval);
+    adviceRotationInterval = null;
   }
 
-  aiMainAdviceText.textContent = mainAdvice;
+  // Reset index on filter change
+  currentAdviceIndex = 0;
 
-  // Show "Next Move" banner with the proposed tool launcher
-  if (activeNextMove) {
-    nextMovePromptText.textContent = activeNextMove.text;
-    nextMoveBannerTrigger.style.display = 'flex';
-  } else {
+  if (!advices || advices.length === 0) {
+    aiMainAdviceText.textContent = `"현재 시즌 및 예식 조건에 맞는 최선의 상담 가이드를 분석 중입니다."`;
     nextMoveBannerTrigger.style.display = 'none';
+    return;
+  }
+
+  // Define display/render helper with fade effect
+  const displayAdvice = (adviceObj) => {
+    // 1. Fade out
+    aiMainAdviceText.style.opacity = '0';
+    aiMainAdviceText.style.transform = 'translateY(5px)';
+    nextMoveBannerTrigger.style.opacity = '0';
+    nextMoveBannerTrigger.style.transform = 'translateY(5px)';
+
+    setTimeout(() => {
+      // 2. Update Content
+      aiMainAdviceText.textContent = adviceObj.advice;
+      
+      activeNextMove = {
+        text: adviceObj.nextMoveText,
+        action: adviceObj.nextMoveAction
+      };
+      nextMovePromptText.textContent = adviceObj.nextMoveText;
+      nextMoveBannerTrigger.style.display = 'flex';
+
+      // Re-trigger repaint to prevent transition skip
+      aiMainAdviceText.offsetHeight;
+
+      // 3. Fade in
+      aiMainAdviceText.style.opacity = '1';
+      aiMainAdviceText.style.transform = 'translateY(0)';
+      nextMoveBannerTrigger.style.opacity = '1';
+      nextMoveBannerTrigger.style.transform = 'translateY(0)';
+      
+      lucide.createIcons();
+    }, 400);
+  };
+
+  // Add initial inline styles for transition if not present
+  aiMainAdviceText.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+  nextMoveBannerTrigger.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+
+  // Render first item immediately
+  displayAdvice(advices[currentAdviceIndex]);
+
+  // Set rotation loop if there are multiple advices
+  if (advices.length > 1) {
+    adviceRotationInterval = setInterval(() => {
+      currentAdviceIndex = (currentAdviceIndex + 1) % advices.length;
+      displayAdvice(advices[currentAdviceIndex]);
+    }, 20000); // 20 seconds rotation loop
   }
 }
 
